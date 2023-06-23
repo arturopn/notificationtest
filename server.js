@@ -55,9 +55,14 @@ app.post('/notifications', (req, res) => {
   if (userName) {
     selectedUsers = users.filter(user => user.Name === userName); // Filter users by selected userName
   }
-
-  const subscribedUsers = selectedUsers.filter(user => user.Subscribed.includes(category));
-
+  console.log("Selected Users:", selectedUsers); // Add this lin
+  const subscribedUsers = selectedUsers.filter(user => {
+    console.log("User:", user.Name);
+    console.log("Subscribed Categories:", user.Subscribed);
+    console.log("Category:", category);
+    return user.Subscribed.includes(category);
+  });
+  console.log("Subscribed Users:", subscribedUsers);
   subscribedUsers.forEach(user => {
     const notificationChannels = []; // Track channels for each user
 
